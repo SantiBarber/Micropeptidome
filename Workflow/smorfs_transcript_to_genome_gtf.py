@@ -5,6 +5,33 @@ from collections import defaultdict, namedtuple
 
 Exon = namedtuple("Exon", ["chrom", "start", "end", "strand"]) # object to store exon information
 
+def parse_transcript_spans(gtf_path):
+    spans = {}
+    with open(gtf_path) as f:
+        for line in f:
+            if line.startswith("#"):
+                continue
+            cols = line.rstrip("\n").split("\t")
+            if len(cols) < 9:
+                continue
+            chrom, source, feature, start, end, score, strand, frame, attrs = cols
+            if feature != "transcript":
+                continue
+
+            transcript_id = None
+            for field in attrs.split(";"):
+                field = field.strip()
+                if field.startswith("transcript_id"):
+                    parts = field.split()
+                    if len(parts) > 1:
+                        transcript_id = parts[1].strip('"')
+                    break
+            if transcript_id is None:
+                continue
+
+            spans[transcript_id] = (chrom, int(start), int(end), strand)
+    return spans
+
 def parse_transcript_exons(gtf_path): # parse GTF to get exons foe each transcript
     exons_by_tx = defaultdict(list) # 
 
@@ -84,9 +111,9 @@ def map_orf_to_genome(tx_exons, strand, orf_start_tx, orf_end_tx): # map ORF coo
 
     return segments
 
-
 def build_smorfs_genomic_gtf(merged_gtf, smorfs_gff3, out_gtf):
     tx_to_exons = parse_transcript_exons(merged_gtf)
+    tx_to_span = parse_transcript_spans(merged_gtf)
 
     # Store ORF → CDS segments first
     orf_segments = defaultdict(list)
@@ -114,7 +141,12 @@ def build_smorfs_genomic_gtf(merged_gtf, smorfs_gff3, out_gtf):
                     break
 
             if tx_id not in tx_to_exons and parent:
-                base = parent.split(".p")[0]
+                base = parent
+                # TransDecoder / your pipeline sometimes prefixes ORFs with "cds."
+                if base.startswith("cds."):
+                    base = base[len("cds.") :]
+                # your pipeline sometimes appends ".p<number>"
+                base = base.split(".p")[0]
                 if base in tx_to_exons:
                     tx_id = base
 
@@ -149,10 +181,14 @@ def build_smorfs_genomic_gtf(merged_gtf, smorfs_gff3, out_gtf):
         for orf_id, segments in orf_segments.items():
             strand, tx_id = orf_meta[orf_id]
 
-            # transcript span
-            tx_chrom = segments[0][0]
-            tx_start = min(s[1] for s in segments)
-            tx_end = max(s[2] for s in segments)
+            # transcript span: take from StringTie transcript model (gives UTR/flanks)
+            if tx_id in tx_to_span:
+                tx_chrom, tx_start, tx_end, _ = tx_to_span[tx_id]
+            else:
+            # fallback (should be rare): use CDS span
+                tx_chrom = segments[0][0]
+                tx_start = min(s[1] for s in segments)
+                tx_end   = max(s[2] for s in segments)            
 
             # write transcript line
             tx_attrs = f'gene_id "{orf_id}"; transcript_id "{orf_id}";'
@@ -167,6 +203,23 @@ def build_smorfs_genomic_gtf(merged_gtf, smorfs_gff3, out_gtf):
                 ".",
                 tx_attrs
             ]) + "\n")
+
+            # write exon lines for the full transcript model (StringTie exons)
+            if tx_id in tx_to_exons:
+                strand_tx, exons = tx_to_exons[tx_id]
+                for exon in exons:
+                    exon_attrs = f'gene_id "{orf_id}"; transcript_id "{orf_id}";'
+                    fout.write("\t".join([
+                        exon.chrom,
+                        "smORFmapper",
+                        "exon",
+                        str(exon.start),
+                        str(exon.end),
+                        ".",
+                        exon.strand,
+                        ".",
+                        exon_attrs
+                        ]) + "\n")
 
             # write CDS segments
             for chrom, g_start, g_end, g_strand in segments:
