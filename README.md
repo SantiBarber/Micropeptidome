@@ -39,12 +39,12 @@ You’ll need:
 
 ### Option 1 – Direct from GitHub (recommended)
 ```bash
-pip install git+https://github.com/Sabiolab/Micropeptidome.git
+pip install git+https://github.com/Sabiolab/Micropeptidome/ShortStop.git
 ```
 
 ### Option 2 – Clone and Install Locally
 ```bash
-git clone https://github.com/Sabiolab/Micropeptidome.git
+git clone https://github.com/Sabiolab/Micropeptidome/ShortStop.git
 cd Micropeptidome
 pip install .
 ```
