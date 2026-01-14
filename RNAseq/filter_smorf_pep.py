@@ -3,6 +3,22 @@
 import argparse
 from Bio import SeqIO
 
+print(r"""
+          _____           _   _     _                      
+ _   _   |  __ \         | | (_)   | |                     
+| | | |  | |__) |__ _ __ | |_ _  __| | ___  _ __ ___   ___ 
+| | | |  |  ___/ _ \ '_ \| __| |/ _` |/ _ \| '_ ` _ \ / _ \
+| |_| |  | |  |  __/ |_) | |_| | (_| | (_) | | | | | |  __/
+| ___/   |_|   \___| .__/ \__|_|\__,_|\___/|_| |_| |_|\___|
+| |                | |                                       
+|_|                |_|                  almoraco 03/11/2025
+""")
+
+print(
+    "filters TransDecoder peptides by length\n"
+    "retaining only those within the smORF size range\n"
+)
+
 def main():
     parser = argparse.ArgumentParser(description="Filter TransDecoder peptide FASTA for small ORFs")
     parser.add_argument("pep_file", help="TransDecoder peptide FASTA file")

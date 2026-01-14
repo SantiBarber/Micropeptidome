@@ -3,6 +3,22 @@
 import argparse # to handle command-line arguments
 from collections import defaultdict, namedtuple
 
+print(r"""
+          _____           _   _     _                      
+ _   _   |  __ \         | | (_)   | |                     
+| | | |  | |__) |__ _ __ | |_ _  __| | ___  _ __ ___   ___ 
+| | | |  |  ___/ _ \ '_ \| __| |/ _` |/ _ \| '_ ` _ \ / _ \
+| |_| |  | |  |  __/ |_) | |_| | (_| | (_) | | | | | |  __/
+| ___/   |_|   \___| .__/ \__|_|\__,_|\___/|_| |_| |_|\___|
+| |                | |                                       
+|_|                |_|                           15/11/2025
+""")
+
+print(
+    "coordinate liftover by mapping transcript positions to genomic coordinates\n"
+    "through exon structure analysis\n"
+)
+
 Exon = namedtuple("Exon", ["chrom", "start", "end", "strand"]) # object to store exon information
 
 def parse_transcript_spans(gtf_path):
