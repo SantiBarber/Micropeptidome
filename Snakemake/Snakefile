@@ -18,7 +18,7 @@ configfile: "config.yaml"
 # Absolute outdir avoids SLURM working-dir surprises
 OUTDIR = str(Path(config["outdir"]).resolve())
 
-# Discover BAMs (use exact paths found, don't reconstruct)
+# Find BAMs
 BAMS = sorted(glob.glob(config["bam_glob"]))
 if not BAMS:
     raise ValueError(f"No BAMs found. Check bam_glob: {config['bam_glob']}")
