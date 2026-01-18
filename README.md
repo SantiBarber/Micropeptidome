@@ -12,9 +12,8 @@
 
 ## What is Micropeptidome?
 
-**Micropeptidome** is a framework for identifying microproteins (<150 aa) from both proteomic and transcriptomic experiments. It inludes several tools:
+**Micropeptidome** is a framework for identification of microproteins from transcriptomic data. It inludes several tools:
 
-- **getefear**: transform your list (.csv) of microproteins in a .gtf doc which can be used to classify later with ShortStop.
 - **ShortStop**: Classifies smORFs as SAMs or PRISMs using a pre-trained ML model ([click for detailed documentation](https://github.com/brendan-miller-salk/ShortStop/blob/master/README.md)). 
 
 ---
