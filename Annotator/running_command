@@ -1,0 +1,9 @@
+python /Users/brendanmiller/Library/CloudStorage/Box-Box/pipelines/Annotator/Annotator.py smorf_types \
+--smorf_gtf /Users/brendanmiller/Library/CloudStorage/Box-Box/brain_smorfs/annotation/2025-08-28_annotation_for_ribocode_plaqueomics_proteogenomics_DIA_shortstop/shortstop_plaqueomics_proteomics_ribocode_DIA_appended_brain_microproteins.gtf \
+--ensembl_gtf /Users/brendanmiller/Library/CloudStorage/Box-Box/post_shortstop_processing/annotation/ensemlb_hg38_filtered.gtf \
+--outdir /Users/brendanmiller/Library/CloudStorage/Box-Box/brain_smorfs/espresso \
+--intersect_output /Users/brendanmiller/Library/CloudStorage/Box-Box/brain_smorfs/espresso/intersect.gtf \
+--non_intersect_output /Users/brendanmiller/Library/CloudStorage/Box-Box/brain_smorfs/espresso/nonintersect.gtf \
+--output_file /Users/brendanmiller/Library/CloudStorage/Box-Box/brain_smorfs/espresso/ESPRESSO_syn52047893_hg38NCBI_N2_R0_updated.sorted_medianCPM05_GENE_CLEANED_ORFs_smorf_types.txt
+———————————
+Brendan 
