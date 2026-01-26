@@ -41,7 +41,7 @@ Create the enviroments the first time:
 ```{}
  snakemake --use-conda --conda-create-envs-only \
   --conda-frontend conda \
-  --conda-prefix /home/sbarber/conda_envs \
+  --conda-prefix /path/to/conda_envs \
   -j 1 --latency-wait 60
 ```
 
@@ -53,7 +53,7 @@ Run with:
 ```{}
 snakemake --use-conda --slurm -j 32 \
   --conda-frontend conda \
-  --conda-prefix /home/sbarber/conda_envs \
+  --conda-prefix /path/to/conda_envs \
   --rerun-incomplete \
   --latency-wait 60
 ```
