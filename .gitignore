@@ -1,0 +1,25 @@
+# Snakemake working dirs / outputs
+.snakemake/
+results/
+_STARtmp/
+Liver_summary.all_loci.with_tpms.blastp_human.blast_tmp/
+Liver_summary.shared_ge2.with_tpms.blastp_human.blast_tmp/
+
+# Workflow-generated cohort summaries (written to CWD by default rules)
+*.all_loci*.csv
+*.shared_ge*.csv
+*.with_tpms*.csv
+*.blastp_human*.csv
+*.blast_tmp/
+
+# Python cruft
+__pycache__/ s
+*.py[cod]
+
+# OS/editor cruft
+.DS_Store
+*.swp
+*.swo
+
+# Other files
+units_test.csv
