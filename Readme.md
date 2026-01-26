@@ -5,31 +5,36 @@ This pipeline can be applied to both human and mouse data, but the original Shor
 ## Genecode
 
 #### Genome.fa FASTA (GRCh38 primary assembly)
+```{}
 wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_38/GRCh38.primary_assembly.genome.fa.gz
 gunzip GRCh38.primary_assembly.genome.fa.gz
-
+```
 #### Annotation GTF (GRCh38; contigs like "chr1", "chr2"... to match the FASTA above)
+```{}
 wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_38/gencode.v38.primary_assembly.annotation.gtf.gz
 gunzip gencode.v38.primary_assembly.annotation.gtf.gz
-
+```
 ## Ensembl
 
 #### Genome FASTA (GRCh38 primary assembly, unmasked)
+```{}
 wget https://ftp.ensembl.org/pub/current_fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
-
+```
 #### Annotation GTF (GRCh38; contigs like "1", "2", ... to match the FASTA above)
+```{}
 wget https://ftp.ensembl.org/pub/current_gtf/homo_sapiens/Homo_sapiens.GRCh38.115.gtf.gz
 gunzip Homo_sapiens.GRCh38.115.gtf.gz
+```
 
 Then, we should download the proteome FASTA. 
 
 ## Proteome
 
 #### Proteome.faa (FASTA)
-wget -O human_proteome.faa \
-"https://rest.uniprot.org/uniprotkb/stream?query=organism_id:9606+AND+reviewed:true&format=fasta"
-
+```{}
+wget -O human_proteome.faa "https://rest.uniprot.org/uniprotkb/stream?query=organism_id:9606+AND+reviewed:true&format=fasta"
+```
 ## Generate the Conda environmnets
 
 Create the enviroments the first time:
@@ -40,7 +45,9 @@ Create the enviroments the first time:
   -j 1 --latency-wait 60
 ```
 
-## Run the pipeline with
+## Run the pipeline
+
+First, change the settings in the `config.yaml` file and make sure all the variables are set.
 
 Run with:
 ```{}
