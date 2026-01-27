@@ -83,7 +83,7 @@ Bowtie2 BAM: alignments to the smORF transcriptome reference (needed for RSEM qu
 
 1. Errors building the enviroments
 
-Nuke the enviroment directory
+Nuke the environment directory
 ```{}
 rm -rf /home/sbarber/conda_envs
 ```
