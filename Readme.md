@@ -1,19 +1,18 @@
 # Setup
 
-To download this pipeline, use:
-```{}
-git clone https://github.com/SantiBarber/Micropeptidome.git
-cd Micropeptidome
-```
 This pipeline requires Snakemake to run. It is recommended to set up a conda enviroment with snakemake. To install a snakemake in a conda enviroment, use:
-
 ```{}
 conda create -n snakemake -c conda-forge -c bioconda snakemake
 conda activate snakemake
 snakemake --version
 ```
-
 To learn more about conda, please visit [Anaconda](https://anaconda.org/channels/anaconda/packages/conda/overview).
+
+To download this pipeline, use:
+```{}
+git clone https://github.com/SantiBarber/Micropeptidome.git
+cd Micropeptidome
+```
 
 Then, please download the references that the pipeline needs to run. I would recommend downloading the Ensembl GTF annotation and FASTA because, for smORF annotation later, those make a distinction between 5' and 3' UTRs. However, both should work fine.
 
