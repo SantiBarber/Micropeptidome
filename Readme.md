@@ -56,7 +56,7 @@ wget -O human_proteome.faa "https://rest.uniprot.org/uniprotkb/stream?query=orga
 
 ## Generate the Conda environmnets
 
-First, we need to create the enviroments the first time. For this, use the command below and change `/path/to/conda_envs` to set a directory where you want the enviroments to be created. The command below will create the enviroments for you with the apporpiate versions of all software that the pipeline will be using.
+The firts time we set up the pipeline, we need to create the conda enviroments containing the software used by the pipeline. To do this, use the following command below and change the path `/path/to/conda_envs` to the path where you want the enviroments to be created. The command below will create the enviroments for you.
 ```{}
  snakemake --use-conda --conda-create-envs-only \
   --conda-frontend conda \
@@ -66,16 +66,15 @@ First, we need to create the enviroments the first time. For this, use the comma
 
 ## Run the pipeline
 
-First, change the settings in the `config.yaml` file and make sure all the variables are set. Remember to change `/path/to/conda_envs ` to the directory set above.
+Once the enviroments have been set up, change the settings in the `config.yaml` file and make sure all the variables are set, including the full pathname to the GTF and FASTA annotations mentioned above. Also, remmber to change `/path/to/conda_envs` to the directory were you created the enviroments.
 
-Run with:
+Them, you can run the pipeline with:
 ```{}
-snakemake --use-conda --slurm -j 32 \
-  --conda-frontend conda \
-  --conda-prefix /path/to/conda_envs \
+snakemake --use-conda --slurm -j 32 --conda-frontend conda --conda-prefix /path/to/conda_envs \
   --rerun-incomplete \
   --latency-wait 60
 ```
+The last flags are not strictly necessary.
 
 # Further considerations
 
@@ -110,4 +109,4 @@ conda clean --packages --tarballs -y
 
 Then, try again!
 
-2. Add_new_error
+2. SLURM execution may be expressed as either `--slurm` or `--executor slurm` depending on snakemake version. If the first one does not work for you, try the second one.
