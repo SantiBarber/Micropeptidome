@@ -1,4 +1,5 @@
-We need to download a few files that we would be using when running the pipeline. I would recommend downloading the Ensembl GTF annotation and FASTA because, for smORF annotation later, those make a distinction between 5' and 3' UTRs. However, both should work fine.
+# Setup
+First, download a some files that the pipeline needs to run properly. I would recommend downloading the Ensembl GTF annotation and FASTA because, for smORF annotation later, those make a distinction between 5' and 3' UTRs. However, both should work fine.
 
 This pipeline can be applied to both human and mouse data, but the original ShortStop was trained with human data. For more information, please refere to the original ShortStop repo: 
 
