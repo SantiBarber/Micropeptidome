@@ -82,15 +82,15 @@ To use a prebuilt STAR index, set in config.yaml: `star_index_dir: "/path/to/exi
 
 To change what ShortStop prediction to use, change `pred_csv: "sams.csv"` to `sams_secreted.csv` or `sams_intracellular.csv`. For more information, check out ShortStop documentation [here](https://github.com/brendan-miller-salk/ShortStop).
 
-The "Annotator.py" script works better with Ensembl-style GTF annotations since those make a distinction between `five_prime_utr` and `three_prime_utr`. In Gencode annotations, there is no such distinction and both fall back to custom made `UTR_ORF` bucket. Regardless of which annotation you want to use, keep it consistent (specially if you are using that annotation for `STAR` alignment)
+The "Annotator.py" script works better with Ensembl-style GTF annotations since those make a distinction between `five_prime_utr` and `three_prime_utr`. In Gencode annotations, there is no such distinction and both fall back to custom made `UTR_ORF` bucket. Regardless of which annotation you want to use, keep it consistent (specially if you are using that annotation for `STAR` alignment).
 
-StringTie takes the STAR-aligned BAM generated from FASTQs and uses it for transcript assembly using a GTF reference (which can be the same reference mentioned above)
+StringTie takes the STAR-aligned BAM generated from FASTQs and uses it for transcript assembly using a GTF reference (which can be the same reference mentioned above).
 
 RSEM quant is done on a different reference (the custom smORF transcriptome built by `rsem-prepare-reference --bowtie2`), so the pipeline alignes the FASTQs again with Bowtie2 to that smORF reference and feed the BAM into `rsem-calculate-expression --alignments`. We use bowtie2 because it is lighter for this task, it is built percisely for transcriptome alignment (whereas STAR has a genome-first mentality with splice awarenes that is not necesarily useful here) and STAR multi-mapping can be troublesom for short sequences.
 
 Thus, those two BAMs are fundamentally different:
 STAR BAM: splice-aware alignments to the genome (for StringTie).
-Bowtie2 BAM: alignments to the smORF transcriptome reference (for RSEM quantification on smORFs)
+Bowtie2 BAM: alignments to the smORF transcriptome reference (for RSEM quantification on smORFs).
 
 
 ## Troubleshooting
