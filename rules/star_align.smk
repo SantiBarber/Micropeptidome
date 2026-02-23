@@ -55,6 +55,7 @@ rule star_align:
         tmpdir="{OUTDIR}/star/{wildcards.sample}.star_tmp"
         mkdir -p "$tmpdir"
 
+        # the flag --outSAMstrandField is required for StringTie later
         STAR \
           --runThreadN {threads} \
           --genomeDir "{STAR_INDEX_DIR}" \
@@ -62,7 +63,8 @@ rule star_align:
           --readFilesCommand zcat \
           --outFileNamePrefix "$tmpdir/" \
           --outSAMtype BAM SortedByCoordinate \
-          --outSAMattributes NH HI AS nM
+          --outSAMstrandField intronMotif \ 
+          --outSAMattributes All
 
         # Rename STAR's default output to your canonical name
         mv "$tmpdir/Aligned.sortedByCoord.out.bam" "{output.bam}"
