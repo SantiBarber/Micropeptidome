@@ -55,7 +55,7 @@ rule star_align:
         tmpdir="{OUTDIR}/star/{wildcards.sample}.star_tmp"
         mkdir -p "$tmpdir"
 
-        # the flag --outSAMstrandField is required for StringTie later
+        # the flag --outSAMstrandField is required for StringTie later. Output MUST be sorted as well
         STAR \
           --runThreadN {threads} \
           --genomeDir "{STAR_INDEX_DIR}" \
