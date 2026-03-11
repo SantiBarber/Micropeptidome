@@ -16,7 +16,7 @@ cd Micropeptidome
 
 Then, please download the required proteome/genome references. Please find below a few examples. I would recommend downloading the Ensembl GTF annotation and FASTA since those make a distinction between 5' and 3' UTRs that Genecode annotation does not make. However, both should work fine.
 
-This pipeline can be applied to both human and mouse data. Keep in mind that the original ShortStop was trained with human data. For more information about this, please refere to the original ShortStop repository [here](https://github.com/brendan-miller-salk/ShortStop) and ShortStop paper [here](https://link.springer.com/article/10.1186/s44330-025-00037-4): 
+This pipeline can be applied to both human and mouse data. Keep in mind that the original ShortStop was trained with human data. For more information about this, please refere to the original ShortStop repository [here](https://github.com/brendan-miller-salk/ShortStop) and ShortStop paper [here](https://link.springer.com/article/10.1186/s44330-025-00037-4).
 
 ### Genecode
 
@@ -97,7 +97,7 @@ Bowtie2 BAM: alignments to the smORF transcriptome reference (for RSEM quantific
 
 Nuke the environment directory
 ```
-rm -rf /home/sbarber/conda_envs
+rm -rf /path/to/your/conda_envs
 ```
 
 Clean packages and tarballs and try again
