@@ -1,7 +1,7 @@
 rule make_smorf_rsem_inputs:
     input:
         loci_csv=f"{COHORT_PREFIX}.all_loci.csv",
-        script=lambda wc: config["add_rsem_tpms_script"]
+        script=lambda wc: config["make_smorf_rsem_ref_script"]
     output:
         fasta=f"{RSEM_REF_DIR}/smorfs.cds.fa",
         tx2gene=f"{RSEM_REF_DIR}/smorfs.tx2gene.tsv"
