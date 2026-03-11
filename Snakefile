@@ -34,7 +34,6 @@ RSEM_REF_DIR = f"{RSEM_DIR}/reference"
 RSEM_REF_PREFIX = f"{RSEM_REF_DIR}/smorfs"
 RSEM_STRANDEDNESS = config.get("rsem_strandedness", "none")
 MAKE_SMORF_RSEM_REF_SCRIPT = config["make_smorf_rsem_ref_script"]
-ADD_RSEM_TPMS_SCRIPT = config["add_rsem_tpms_script"]
 
 HUMAN_PROTEOME_FA = config["human_proteome_fa"]
 HUMAN_DB_PREFIX = config.get("human_blastdb_prefix", f"{OUTDIR}/blastdb/human_proteome")
