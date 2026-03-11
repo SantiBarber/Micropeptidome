@@ -96,8 +96,21 @@ def merge_one_sample(sample_dir: Path, out_dir: Path, min_prob: float | None) ->
     pred["orf_id_clean"] = pred["orf_id"].map(clean_orf_id)
     seq["orf_id_clean"]  = seq["orf_id"].map(clean_orf_id)
 
-    if min_prob is not None and "probability" in pred.columns:
-        pred = pred[pred["probability"] >= min_prob].copy()
+    # ShortStop outputs have used both `sam_probability` and `probability`.
+    # Normalize to `sam_probability` so downstream steps can rely on one name.
+    prob_col = None
+    if "sam_probability" in pred.columns:
+        prob_col = "sam_probability"
+    elif "probability" in pred.columns:
+        pred = pred.rename(columns={"probability": "sam_probability"})
+        prob_col = "sam_probability"
+
+    if min_prob is not None:
+        if prob_col is None:
+            raise ValueError(
+                f"min_prob was provided, but no probability column was found in {pred_path}"
+            )
+        pred = pred[pred[prob_col] >= min_prob].copy()
 
     merged = pred.merge(
         seq,
