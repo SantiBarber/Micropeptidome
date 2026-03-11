@@ -21,7 +21,7 @@ merged_dir: "results/merged_per_sample"
 rsem_dir: "results/results_rsem_smorf"  
 
 # RSEM
-rsem_strandedness: "none"
+rsem_strandedness: "none" # "forward" or "reverse"
 
 # aggregation
 min_patients: 2
