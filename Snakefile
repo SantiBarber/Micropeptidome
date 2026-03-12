@@ -23,7 +23,6 @@ def bam_path(wc):
     return star_bam(wc.sample)
 
 RESULTS_SHORTSTOP_DIR = f"{OUTDIR}/results_shortstop"
-MERGED_DIR = config.get("merged_dir", f"{OUTDIR}/merged_per_sample")
 COHORT_PREFIX = config["cohort_prefix"]
 MIN_PATIENTS = int(config.get("min_patients", 2))
 
@@ -32,14 +31,7 @@ UNITS_CSV = config["units_csv"]
 RSEM_DIR = config.get("rsem_dir", f"{OUTDIR}/results_rsem_smorf")
 RSEM_REF_DIR = f"{RSEM_DIR}/reference"
 RSEM_REF_PREFIX = f"{RSEM_REF_DIR}/smorfs"
-RSEM_STRANDEDNESS = config.get("rsem_strandedness", "none")
 MAKE_SMORF_RSEM_REF_SCRIPT = config["make_smorf_rsem_ref_script"]
-ADD_RSEM_TPMS_SCRIPT = config["add_rsem_tpms_script"]
-
-HUMAN_PROTEOME_FA = config["human_proteome_fa"]
-HUMAN_DB_PREFIX = config.get("human_blastdb_prefix", f"{OUTDIR}/blastdb/human_proteome")
-BLAST_EVALUE = float(config.get("blastp_evalue", 1e-3))
-
 
 # Build mapping: sample -> (r1, r2)
 UNITS = {}
@@ -82,7 +74,6 @@ include: "rules/annotator.smk"
 include: "rules/merge.smk"
 include: "rules/rsem.smk"
 include: "rules/blastp.smk"
-
 
 ### --------------------------------------------------oOo------------------------------------------------- ###
 

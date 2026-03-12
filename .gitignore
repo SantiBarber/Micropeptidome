@@ -23,3 +23,8 @@ __pycache__/ s
 
 # Other files
 units_test.csv
+
+# annotations
+*.faa
+*.fa
+*.gtf

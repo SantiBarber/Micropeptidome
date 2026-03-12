@@ -99,7 +99,7 @@ rule rsem_quant_smorf:
         runtime=600
     params:
         ref=RSEM_REF_PREFIX,
-        stranded=RSEM_STRANDEDNESS
+        stranded=config.get("rsem_strandedness", "none")
     conda:
         "../envs/RSEM.yaml"
     shell:
@@ -125,7 +125,7 @@ rule add_rsem_tpms_to_locus_summary:
         all_loci=f"{COHORT_PREFIX}.all_loci.csv",
         shared=f"{COHORT_PREFIX}.shared_ge{MIN_PATIENTS}.csv",
         rsem_isoforms=expand(f"{RSEM_DIR}/{{sample}}/{{sample}}.isoforms.results", sample=SAMPLES),
-        script=lambda wc: ADD_RSEM_TPMS_SCRIPT
+        script=lambda wc: config["add_rsem_tpms_script"]
     output:
         all_loci_tpm=f"{COHORT_PREFIX}.all_loci.with_tpms.csv",
         shared_tpm=f"{COHORT_PREFIX}.shared_ge{MIN_PATIENTS}.with_tpms.csv"

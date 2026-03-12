@@ -1,6 +1,6 @@
 rule make_human_proteome_blastdb:
     input:
-        fa=HUMAN_PROTEOME_FA
+        fa=config["human_proteome_fa"]
     output:
         done=f"{OUTDIR}/blastdb/human_proteome.db.done"
     threads: 1
@@ -8,7 +8,7 @@ rule make_human_proteome_blastdb:
         mem_mb=16000,
         runtime=240
     params:
-        db_prefix=HUMAN_DB_PREFIX
+        db_prefix=config.get("human_blastdb_prefix", f"{OUTDIR}/blastdb/human_proteome")
     conda:
         "../envs/BlastP.yaml"
     shell:
@@ -37,8 +37,8 @@ rule blastp_human_homology_locus_summary:
         mem_mb=24000,
         runtime=240
     params:
-        db_prefix=HUMAN_DB_PREFIX,
-        evalue=BLAST_EVALUE
+        db_prefix=config.get("human_blastdb_prefix", f"{OUTDIR}/blastdb/human_proteome"),
+        evalue=float(config.get("blastp_evalue", 1e-3))
     conda:
         "../envs/BlastP.yaml"
     shell:
@@ -64,8 +64,8 @@ rule blastp_human_homology_shared_summary:
         mem_mb=24000,
         runtime=240
     params:
-        db_prefix=HUMAN_DB_PREFIX,
-        evalue=BLAST_EVALUE
+        db_prefix=config.get("human_blastdb_prefix", f"{OUTDIR}/blastdb/human_proteome"),
+        evalue=float(config.get("blastp_evalue", 1e-3))
     conda:
         "../envs/BlastP.yaml"
     shell:

@@ -2,12 +2,12 @@
 # Requires in main Snakefile:
 #   - OUTDIR, STAR_INDEX_DIR
 #   - fastq_r1(), fastq_r2()
-#   - config["genome_fa"], config["gencode_gtf"]
+#   - config["genome_fa"], config["genome_gtf"]
 
 rule star_genome_index:
     input:
         genome=config["genome_fa"],
-        gtf=config["gencode_gtf"]
+        gtf=config["genome_gtf"]
     output:
         # Use a STAR-produced file as the sentinel so users can supply a prebuilt index dir.
         genome=f"{STAR_INDEX_DIR}/Genome"
