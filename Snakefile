@@ -26,8 +26,6 @@ RESULTS_SHORTSTOP_DIR = f"{OUTDIR}/results_shortstop"
 COHORT_PREFIX = config["cohort_prefix"]
 MIN_PATIENTS = int(config.get("min_patients", 2))
 
-UNITS_CSV = config["units_csv"]
-
 RSEM_DIR = config.get("rsem_dir", f"{OUTDIR}/results_rsem_smorf")
 RSEM_REF_DIR = f"{RSEM_DIR}/reference"
 RSEM_REF_PREFIX = f"{RSEM_REF_DIR}/smorfs"
@@ -35,7 +33,7 @@ MAKE_SMORF_RSEM_REF_SCRIPT = config["make_smorf_rsem_ref_script"]
 
 # Build mapping: sample -> (r1, r2)
 UNITS = {}
-with open(UNITS_CSV, newline="") as fh:
+with open(config["units_csv"], newline="") as fh:
     reader = csv.DictReader(fh)
     for row in reader:
         sample = (row.get("sample") or row.get("name") or "").strip()
@@ -44,26 +42,26 @@ with open(UNITS_CSV, newline="") as fh:
         if not sample:
             continue
         if not r1 or not r2:
-            raise ValueError(f"Missing r1/r2 for sample '{sample}' in {UNITS_CSV}")
+            raise ValueError(f"Missing r1/r2 for sample '{sample}' in {config["units_csv"]}")
         if sample in UNITS:
-            raise ValueError(f"Duplicate sample '{sample}' in {UNITS_CSV}")
+            raise ValueError(f"Duplicate sample '{sample}' in {config["units_csv"]}")
         UNITS[sample] = (r1, r2)
 
 SAMPLES = sorted(UNITS.keys())
 if not SAMPLES:
-    raise ValueError(f"No samples found in {UNITS_CSV}. Check units.csv.")
+    raise ValueError(f"No samples found in {config["units_csv"]}. Check units.csv.")
 
 def fastq_r1(wc):
     try:
         return UNITS[wc.sample][0]
     except KeyError as e:
-        raise ValueError(f"No FASTQ entry for sample '{wc.sample}' in {UNITS_CSV}") from e
+        raise ValueError(f"No FASTQ entry for sample '{wc.sample}' in {config["units_csv"]}") from e
 
 def fastq_r2(wc):
     try:
         return UNITS[wc.sample][1]
     except KeyError as e:
-        raise ValueError(f"No FASTQ entry for sample '{wc.sample}' in {UNITS_CSV}") from e
+        raise ValueError(f"No FASTQ entry for sample '{wc.sample}' in {config["units_csv"]}") from e
 
 include: "rules/star_align.smk"
 include: "rules/stringtie.smk"
