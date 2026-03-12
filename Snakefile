@@ -29,7 +29,6 @@ MIN_PATIENTS = int(config.get("min_patients", 2))
 RSEM_DIR = config.get("rsem_dir", f"{OUTDIR}/results_rsem_smorf")
 RSEM_REF_DIR = f"{RSEM_DIR}/reference"
 RSEM_REF_PREFIX = f"{RSEM_REF_DIR}/smorfs"
-MAKE_SMORF_RSEM_REF_SCRIPT = config["make_smorf_rsem_ref_script"]
 
 # Build mapping: sample -> (r1, r2)
 UNITS = {}
