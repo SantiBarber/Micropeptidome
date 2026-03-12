@@ -1,7 +1,7 @@
 rule stringtie_assemble:
     input:
         bam=bam_path,
-        ref_gtf=config["gencode_gtf"]
+        ref_gtf=config["genome_gtf"]
     output:
         gtf=f"{RESULTS_SHORTSTOP_DIR}/{{sample}}/stringtie/{{sample}}.gtf"
     threads: config.get("threads_stringtie", 8)
