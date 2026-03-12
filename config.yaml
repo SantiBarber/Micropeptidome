@@ -20,7 +20,7 @@ merged_dir: "/storage/scratch01/groups/md/microproteins/Microproteins_pipeline/V
 rsem_dir: "/storage/scratch01/groups/md/microproteins/Microproteins_pipeline/Visceral/results_rsem_smorf"  
 
 # RSEM
-rsem_strandedness: "reverse"
+rsem_strandedness: "reverse" # "none" or "forward"
 
 # aggregation
 min_patients: 2 # Keep loci observed in at least this many patients
