@@ -19,7 +19,7 @@ rule annotator_smorf_types:
 
         python "scripts/Annotator/Annotator.py" smorf_types \
           --smorf_gtf "{input.smorf_gtf}" \
-          --genome_gtf "{input.genome_gtf}" \
+          --ensembl_gtf "{input.genome_gtf}" \
           --outdir "{RESULTS_SHORTSTOP_DIR}/{wildcards.sample}/shortstop" \
           --intersect_output "{output.intersect}" \
           --non_intersect_output "{output.non_intersect}" \
