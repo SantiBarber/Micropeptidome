@@ -63,7 +63,7 @@ rule star_align:
           --readFilesCommand zcat \
           --outFileNamePrefix "$tmpdir/" \
           --outSAMtype BAM SortedByCoordinate \
-          --outSAMstrandField intronMotif \ 
+          --outSAMstrandField intronMotif \
           --outSAMattributes All
 
         # Rename STAR's default output to your canonical name
