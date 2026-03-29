@@ -39,7 +39,7 @@ rule transdecoder_longorfs:
         mkdir -p "{RESULTS_SHORTSTOP_DIR}/{wildcards.sample}/transdecoder"
 
         cd "{RESULTS_SHORTSTOP_DIR}/{wildcards.sample}/transcripts"
-        TransDecoder.LongOrfs -t -m "{params.min_aa}" "{wildcards.sample}.transcripts.fa"
+        TransDecoder.LongOrfs -t "{wildcards.sample}.transcripts.fa" -m "{params.min_aa}"
 
         touch "../transdecoder/longorfs.done"
         """
@@ -52,8 +52,6 @@ rule transdecoder_predict:
         pep=f"{RESULTS_SHORTSTOP_DIR}/{{sample}}/transcripts/{{sample}}.transcripts.fa.transdecoder.pep",
         gff3=f"{RESULTS_SHORTSTOP_DIR}/{{sample}}/transcripts/{{sample}}.transcripts.fa.transdecoder.gff3"
     threads: 1
-    params:
-        min_aa=config.get("min_aa", "100")
     resources:
         mem_mb=24000,
         runtime=120
@@ -65,7 +63,7 @@ rule transdecoder_predict:
 
         cd "{RESULTS_SHORTSTOP_DIR}/{wildcards.sample}/transcripts"
 
-        TransDecoder.Predict -t -m "{params.min_aa}" "{wildcards.sample}.transcripts.fa"
+        TransDecoder.Predict -t "{wildcards.sample}.transcripts.fa"
 
         test -s "{wildcards.sample}.transcripts.fa.transdecoder.pep"
         test -s "{wildcards.sample}.transcripts.fa.transdecoder.gff3"
