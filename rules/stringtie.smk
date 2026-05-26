@@ -16,7 +16,7 @@ rule stringtie_assemble:
         bam=bam_path,
         ref_gtf=config["genome_gtf"]
     output:
-        gtf=f"{RESULTS_SHORTSTOP_DIR}/{{sample}}/stringtie/{{sample}}.gtf"
+        gtf=f"{STRINGTIE_RESULTS_DIR}/{{sample}}.gtf"
     threads: config.get("threads_stringtie", 8)
     resources:
         mem_mb=16000,
@@ -30,7 +30,7 @@ rule stringtie_assemble:
     shell:
         r"""
         set -euo pipefail
-        mkdir -p "{RESULTS_SHORTSTOP_DIR}/{wildcards.sample}/stringtie"
+        mkdir -p "{STRINGTIE_RESULTS_DIR}"
 
         stringtie "{input.bam}" \
           -G "{input.ref_gtf}" \

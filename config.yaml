@@ -20,6 +20,7 @@ blastp_append_script: "scripts/blastp_append_human_homology.py"
 
 # Output directories
 outdir: "/storage/scratch01/groups/md/microproteins/Microproteins_pipeline/Liver"
+results_stringtie_dir: "/storage/scratch01/groups/md/microproteins/Microproteins_pipeline/Liver/results_stringtie"
 cohort_results_dir: "/storage/scratch01/groups/md/microproteins/Microproteins_pipeline/Liver/results_cohort"
 cohort_merged_dir: "/storage/scratch01/groups/md/microproteins/Microproteins_pipeline/Liver/merged_cohort"
 rsem_dir: "/storage/scratch01/groups/md/microproteins/Microproteins_pipeline/Liver/results_rsem_smorf"

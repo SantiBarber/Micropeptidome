@@ -45,8 +45,8 @@ USE_PREBUILT_STAR_INDEX = bool(config.get("use_prebuilt_star_index", False))
 STRINGTIE_MERGE_DIR = resolve_pipeline_path(
     config.get("stringtie_merge_dir", f"{OUTDIR}/stringtie_merge")
 )
-RESULTS_SHORTSTOP_DIR = resolve_pipeline_path(
-    config.get("results_shortstop_dir", f"{OUTDIR}/results_shortstop")
+STRINGTIE_RESULTS_DIR = resolve_pipeline_path(
+    config.get("results_stringtie_dir", f"{OUTDIR}/results_stringtie")
 )
 COHORT_RESULTS_ROOT = resolve_pipeline_path(
     config.get(
@@ -90,7 +90,7 @@ def star_bai(sample: str) -> str:
 
 
 def stringtie_gtf(sample: str) -> str:
-    return f"{RESULTS_SHORTSTOP_DIR}/{sample}/stringtie/{sample}.gtf"
+    return f"{STRINGTIE_RESULTS_DIR}/{sample}.gtf"
 
 
 def cohort_results_dir() -> str:
