@@ -33,3 +33,4 @@ units_test.csv
 *.sh
 *.err
 *.out
+.Rhistory
